@@ -1,4 +1,5 @@
 import os
+from collections import Counter
 
 
 def load_input():
@@ -21,11 +22,17 @@ def get_sorted_diff(arr1, arr2):
     return total_diff
 
 
+def get_similarity_score(arr1, arr2_counter):
+    cumulative_score = 0
+    for item in arr1:
+        cumulative_score += item * arr2_counter[item]
+    return cumulative_score
+
+
 def main():
     arr1, arr2 = load_input()
-    summed_diff = get_sorted_diff(arr1, arr2)
-    print('summed diff is:', summed_diff)
-    return summed_diff
+    print('Part 1: summed diff is:', get_sorted_diff(arr1, arr2))
+    print('Part 2: similarity score is:', get_similarity_score(arr1, Counter(arr2)))
 
 
 if __name__ == '__main__':
